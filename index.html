@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 20px;
+            font-family:"Montserret",sans-serif ;
+        }
+        .container{
+            background-color: rgba(128, 128, 128, 0.276);
+            box-shadow: 0 0 10px 5px grey;
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+            border-radius: 5px;
+        }
+        h1{
+            font-size: 36px;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label{
+            display: flex;
+            margin-bottom: 10px;
+        }
+        button{
+                background-color: rgba(0, 0, 255, 0.621);
+                color: white;
+                border: none;
+                padding: 5px 5px;
+                margin-top: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                border-radius: 15px;
+        }
+        button:hover{
+            background-color: gold;
+        }
+        input{
+            padding: 8px;
+            border: 1px solid #ccb;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+        }
+        #result{
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <div class="form">
+            <label for="birthday">Enter your date of birth</label>
+            <input type="date" id="birthday" name="birthday">
+            <button id="btn">Calculate age</button>
+            <p id="result">Your age is 21 years old</p>
+        </div>
+    </div>
+    <script>
+        const btnEL=document.getElementById("btn");
+        const birthdayEL=document.getElementById("birthday");
+        const resultEL=document.getElementById("result");
+        function calculateAge(){
+            const birthdayVal=birthdayEL.value;
+            if(birthdayVal===""){
+                alert("please enter your birthday");
+            }
+            else{
+                const age=getAge(birthdayVal);
+                resultEL.innerText=`Your age is ${age} ${age>1 ?"Years":"year"} old`;
+            }
+        }
+        function getAge(birthdayVal){
+                const currentDate=new Date();
+                const birthDate=new Date(birthdayVal);
+                let age=currentDate.getFullYear()-birthDate.getFullYear();
+                const month=currentDate.getMonth()-birthDate.getMonth();
+                if(month<0 ||(month===0&&currentDate.getDate()-birthDate.getDate())){
+                    age--;
+                }
+                return age;
+        }
+        btnEL.addEventListener("click", calculateAge)
+    </script>
+</body>
+</html>
